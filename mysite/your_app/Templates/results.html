@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Review - Results</title>
+</head>
+<body>
+    <h1>Results</h1>
+    <p><strong>Actor: </strong> {{ actor_name }}</p> <p><strong>Genre: </strong>{{genre_result}}</p>
+    <p><strong>List Of Films:</strong> {{ actor_result }}</p>
+    <p><strong>Name of Film:</strong> {{ film_name}}</p>
+    <p><strong>Movie Summary:</strong> {{ summary_result }}</p>
+
+    <a href="{% url 'html' %}">Back to Form</a>
+</body>
+</html>

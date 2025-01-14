@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Review - Input Form</title>
+</head>
+<body>
+    <h1>Enter Actor and Genre</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="actorNameInput">Actor Name:</label>
+        <input type="text" id="actorNameInput" name="actorNameInput" required /><br><br>
+        <label for="filmNameInput">Film Name:</label>
+        <input type="text" id="filmNameInput" name="filmNameInput" required /><br><br>
+        <label for="genreNameInput">Genre Name:</label>
+        <input type="text" id="genreNameInput" name="genreNameInput" required /><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
