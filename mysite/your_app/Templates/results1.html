@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Review - Results</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9fb;
+            color: #333;
+        }
+
+        /* Header styles */
+        header {
+            background: linear-gradient(90deg, #3a3d40, #18191a);
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.8em;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+        }
+
+        /* Main container */
+        .results-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 30px;
+            padding: 30px;
+            max-width: 1200px;
+            margin: 30px auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Left column */
+        .left-column {
+            flex: 1;
+            padding: 20px;
+            border-right: 2px solid #f0f0f5;
+        }
+
+        .left-column h2 {
+            font-size: 1.8em;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        .film-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .film-list li {
+            padding: 10px;
+            background: #f5f5f7;
+            border: 1px solid #e0e0e5;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .film-list li:hover {
+            background: #ebf4ff;
+            border-color: #d1e7ff;
+        }
+
+        /* Right column */
+        .right-column {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .right-column h2 {
+            font-size: 1.8em;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        .summary {
+            background: #f8f9fc;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #e6e8eb;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .summary p {
+            margin: 10px 0;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        /* Back to form button */
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background: #007bff;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1em;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: #0056b3;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>Movie Review</h1>
+    </header>
+
+    <!-- Results Container -->
+    <div class="results-container">
+        <!-- Left Column -->
+        <div class="left-column">
+            <h2>Actor & Genre</h2>
+            <p><strong>Actor:</strong> {{ actor_name }}</p>
+            <p><strong>Genre:</strong> {{ genre_result }}</p>
+
+            <h2>Random List of Films</h2>
+            <ul class="film-list">
+                {% for film in actor_result %}
+                    <li>{{ film }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Right Column -->
+        <div class="right-column">
+            <h2>Movie Details</h2>
+            <div class="summary">
+                <p><strong>Name of Film:</strong> {{ film_name }}</p>
+                <p><strong>Summary:</strong> {{ summary_result }}</p>
+            </div>
+
+            <h2>Selected Movie Details</h2>
+            <div class="summary">
+                <p><strong>Name of Selected Film:</strong> {{ filmSel_name }}</p>
+                <p><strong>Summary:</strong> {{ summarySel_result }}</p>
+            </div>
+           
+            <a href="{% url 'html' %}" class="back-link">Back to Form</a>
+        </div>
+    </div>
+
+    <script>
+        // Fonction pour récupérer dynamiquement le résumé d'un film au clic
+        function fetchSummary(filmTitle) {
+            fetch(`/get_movie_summary/?title=${encodeURIComponent(filmTitle)}`)
+                .then(response => response.json())
+                .then(data => {
+                    alert(`Summary for ${filmTitle}: ${data.summary}`);
+                })
+                .catch(() => {
+                    alert("Error fetching the summary.");
+                });
+        }
+    </script>
+
+
+</body>
+</html>

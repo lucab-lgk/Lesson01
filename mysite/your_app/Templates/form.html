@@ -4,19 +4,149 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie Review - Input Form</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f4f6;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        /* Container Styles */
+        .form-container {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 450px;
+            width: 90%;
+            margin-top: 20px;
+        }
+
+        /* Title for Movie Review */
+        .main-title {
+            font-size: 2.5em;
+            color: #000000;
+            font-weight: bold;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        /* Title for the form */
+        .form-container h1 {
+            font-size: 1.8em;
+            color: #444;
+            font-weight: normal;
+            margin-bottom: 30px;
+            text-transform: capitalize;
+        }
+
+        /* Form Styles */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="text"] {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 1em;
+            background: #f7f7f9;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+            background: #fff;
+            outline: none;
+        }
+
+        /* Submit Button */
+        button {
+            padding: 12px 20px;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: #0056b3;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        /* Add a line above the Film Name */
+        .line-above-film {
+            border-top: 2px solid #ddd;
+            margin-bottom: 20px;
+        }
+
+        /* Responsiveness */
+        @media (max-width: 500px) {
+            .form-container {
+                padding: 20px;
+            }
+
+            .main-title {
+                font-size: 2em;
+            }
+
+            .form-container h1 {
+                font-size: 1.4em;
+            }
+
+            button {
+                font-size: 1em;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Enter Actor and Genre</h1>
-    <form method="POST">
-        {% csrf_token %}
-        <label for="actorNameInput">Actor Name:</label>
-        <input type="text" id="actorNameInput" name="actorNameInput" required /><br><br>
-        <label for="filmNameInput">Film Name:</label>
-        <input type="text" id="filmNameInput" name="filmNameInput" required /><br><br>
-        <label for="genreNameInput">Genre Name:</label>
-        <input type="text" id="genreNameInput" name="genreNameInput" required /><br><br>
+    <div class="form-container">
+        <!-- Main Title -->
+        <div class="main-title"><b><u>Movie Review</u></b></div>
+        
+        <!-- Form Title -->
 
-        <button type="submit">Submit</button>
-    </form>
+
+        <form method="POST">
+            {% csrf_token %}
+            <label for="actorNameInput">Actor Name:</label>
+            <input type="text" id="actorNameInput" name="actorNameInput" placeholder="Enter actor name" />
+
+            <label for="genreNameInput">Genre Name:</label>
+            <input type="text" id="genreNameInput" name="genreNameInput" placeholder="Enter genre name" />
+
+            <div class="line-above-film"></div> <!-- Line above the Film Name -->
+            <label for="filmNameInput">Film Name:</label>
+            <input type="text" id="filmNameInput" name="filmNameInput" placeholder="Enter film name" />
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
 </body>
 </html>

@@ -1,5 +1,5 @@
 import requests # type: ignore
-
+import random
 
 
 
@@ -37,19 +37,89 @@ def get_genre_id(genre):
 
 def get_movies_by_actor(x,genre_name):
         # Obtenir l'ID de l'acteur
+        
+        random_page = str(random.randint(1,1))
+        print("test")
+        print(random_page)
+        
         actor_id = get_actor_id(x)
         genre_id = get_genre_id(genre_name)
         # Construire l'URL pour découvrir les films de l'acteur
-        #url = f"https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_people={actor_id}"
-        url = f"https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres={genre_id}&with_people={actor_id}"
+        if genre_id is None :
+            
+            
+            headers = {
+                "accept": "application/json",
+                "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjYjRjODI0M2FlZTJmOTBkNGRlOTBlYzFhNWYyMjJiZiIsIm5iZiI6MTczMjAwOTQzNC4zNDg3MjcyLCJzdWIiOiI2NmZiYzRmNjhhYTczNGIzNzZhNjZmOWUiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.ALd7Ps3igocwTL5NoHKi5g43HRMjiF52uW1sp9ZrwDE"
+            }
+            url = f"https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page={random_page}&sort_by=popularity.desc&with_people={actor_id}"
+            response4 = requests.get(url, headers=headers)
+            print(response4)
+            data2 = response4.json()
+            
+            randompage = data2.get('total_pages',1)
+            print(randompage)
+            
+            url = f"https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page={get_random(randompage)}&sort_by=popularity.desc&with_people={actor_id}"
+            
+        elif actor_id is None:
+            headers = {
+    "accept": "application/json",
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjYjRjODI0M2FlZTJmOTBkNGRlOTBlYzFhNWYyMjJiZiIsIm5iZiI6MTczMjAwOTQzNC4zNDg3MjcyLCJzdWIiOiI2NmZiYzRmNjhhYTczNGIzNzZhNjZmOWUiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.ALd7Ps3igocwTL5NoHKi5g43HRMjiF52uW1sp9ZrwDE"
+        }
+            url = f"https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page={random_page}&sort_by=popularity.desc&with_genres={genre_id}"
+            
+            response4 = requests.get(url, headers=headers)
+            print(response4)
+            data2 = response4.json()
+            
+            randompage = data2.get('total_pages',1)
+            print(randompage)
+            
+            url = f"https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page={get_random(randompage)}&sort_by=popularity.desc&with_genres={genre_id}"
+
+            
+        else:
+            headers = {
+    "accept": "application/json",
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjYjRjODI0M2FlZTJmOTBkNGRlOTBlYzFhNWYyMjJiZiIsIm5iZiI6MTczMjAwOTQzNC4zNDg3MjcyLCJzdWIiOiI2NmZiYzRmNjhhYTczNGIzNzZhNjZmOWUiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.ALd7Ps3igocwTL5NoHKi5g43HRMjiF52uW1sp9ZrwDE"
+        }
+            url = f"https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page={random_page}&sort_by=popularity.desc&with_genres={genre_id}&with_people={actor_id}"
+            
+            response4 = requests.get(url, headers=headers)
+            print(response4)
+            data2 = response4.json()
+            
+            randompage = data2.get('total_pages',1)
+            print(randompage)
+            
+            url = f"https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page={random_page}&sort_by=popularity.desc&with_genres={genre_id}&with_people={actor_id}"
+
+            
+        
         headers = {
     "accept": "application/json",
     "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjYjRjODI0M2FlZTJmOTBkNGRlOTBlYzFhNWYyMjJiZiIsIm5iZiI6MTczMjAwOTQzNC4zNDg3MjcyLCJzdWIiOiI2NmZiYzRmNjhhYTczNGIzNzZhNjZmOWUiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.ALd7Ps3igocwTL5NoHKi5g43HRMjiF52uW1sp9ZrwDE"
         }
+        #response4 = requests.get(url, headers=headers)
+        #print(response4)
+        #data1 = response4.json()
+        
+        #print(data1)
+        
         response4 = requests.get(url, headers=headers)
+        print(response4)
         data1 = response4.json()
+            
+        randompage = data1.get('total_pages',1)
+        print(randompage)
         
         
+                
+        if genre_id is not None and genre_name:  # genre_name should not be None or empty
+            random.shuffle(data1['results'])  # Mélanger les films (présumant que les films sont dans 'results')
+
+            
         film_titles = [movie['original_title'] for movie in data1['results']]
 
         # Afficher et retourner la liste des titres
@@ -57,3 +127,13 @@ def get_movies_by_actor(x,genre_name):
         print(genre_id)
         print(film_titles)
         return film_titles
+    
+    
+
+        
+def get_random(number):
+    if number>500:
+        number = 500
+    random_page = str(random.randint(1,number))
+    print(random_page)
+    return random_page
