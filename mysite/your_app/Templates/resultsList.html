@@ -96,19 +96,6 @@
             margin-bottom: 20px;
         }
 
-        .summary {
-            background: #f8f9fc;
-            padding: 20px;
-            border-radius: 10px;
-            border: 1px solid #e6e8eb;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-        }
-
-        .summary p {
-            margin: 10px 0;
-            line-height: 1.6;
-            color: #555;
-        }
 
         /* Back to form button */
         .back-link {
@@ -154,19 +141,13 @@
 
         <!-- Right Column -->
         <div class="right-column">
-            <h2>Movie Details (From Form)</h2>
-            <div class="summary">
-                <p><strong>Name of Film:</strong> {{ film_name }}</p>
-                <p><strong>Summary:</strong> {{ summary_result }}</p>
-            </div>
-
+            
             <h2>Selected Movie Details (From List)</h2>
             <div class="summary">
                 <p><strong>Name of Selected Film:</strong> <span id="film-name">Click on a film</span></p>
                 <p><strong>Summary:</strong> <span id="film-summary">Summary will appear here</span></p>
             </div>
-           
-            <a href="{% url 'html' %}" class="back-link">Back to Form</a>
+        
         </div>
     </div>
 

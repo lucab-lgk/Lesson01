@@ -136,22 +136,6 @@
         <h1>Movie Review</h1>
     </header>
 
-    <!-- Results Container -->
-    <div class="results-container">
-        <!-- Left Column -->
-        <div class="left-column">
-            <h2>Actor & Genre</h2>
-            <p><strong>Actor:</strong> {{ actor_name }}</p>
-            <p><strong>Genre:</strong> {{ genre_result }}</p>
-
-            <h2>Random List of Films</h2>
-            <ul class="film-list">
-                {% for film in actor_result %}
-                    <li onclick="selectFilm(this, '{{ film }}')">{{ film }}</li>
-                {% endfor %}
-            </ul>
-        </div>
-
         <!-- Right Column -->
         <div class="right-column">
             <h2>Movie Details (From Form)</h2>
@@ -160,45 +144,6 @@
                 <p><strong>Summary:</strong> {{ summary_result }}</p>
             </div>
 
-            <h2>Selected Movie Details (From List)</h2>
-            <div class="summary">
-                <p><strong>Name of Selected Film:</strong> <span id="film-name">Click on a film</span></p>
-                <p><strong>Summary:</strong> <span id="film-summary">Summary will appear here</span></p>
-            </div>
-           
-            <a href="{% url 'html' %}" class="back-link">Back to Form</a>
-        </div>
-    </div>
-
-    <script>
-        function selectFilm(element, filmTitle) {
-            // Retirer la sélection des autres films
-            document.querySelectorAll('.film-list li').forEach(item => item.classList.remove('selected'));
-    
-            // Ajouter la classe 'selected' au film cliqué
-            element.classList.add('selected');
-    
-            // Mettre à jour les données affichées
-            const filmSel_name = document.getElementById('film-name');
-            const summarySel_result = document.getElementById('film-summary');
-            filmSel_name.textContent = filmTitle;
-            summarySel_result.textContent = 'Loading summary...';
-    
-            // Charger le résumé du film sélectionné
-            fetch(`/get_movie_summary/?title=${encodeURIComponent(filmTitle)}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.summary) {
-                        summarySel_result.textContent = data.summary;
-                    } else {
-                        summarySel_result.textContent = 'No summary available.';
-                    }
-                })
-                .catch(() => {
-                    summarySel_result.textContent = 'Error loading summary.';
-                });
-        }
-    </script>
 
 </body>
 </html>

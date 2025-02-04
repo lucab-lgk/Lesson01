@@ -22,7 +22,11 @@ from . import SummaryOfFilm
 from . import chatgpt1
 
 urlpatterns = [
-    path('',chatgpt1.html, name='html'),
+    
+    path('get_movie_summary/', chatgpt1.get_movie_summary, name='get_movie_summary'),
+    path('',chatgpt1.renderList, name='renderList'),
+    path('',chatgpt1.renderSumm, name='renderSumm'),
+    #path('',chatgpt1.html1, name='html1'),
 
     
     
