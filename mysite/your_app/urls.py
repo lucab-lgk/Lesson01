@@ -26,7 +26,7 @@ urlpatterns = [
     path('get_movie_summary/', chatgpt1.get_movie_summary, name='get_movie_summary'),
     path('renderSumm/', chatgpt1.renderSumm, name='renderSumm'),
     path('renderList/',chatgpt1.renderList, name='renderList'),
-    path('html',chatgpt1.html1, name='html'),
+    path('',chatgpt1.html1, name='html'),
 
     
     
