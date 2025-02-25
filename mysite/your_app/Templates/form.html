@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -132,43 +133,46 @@
         }
     </style>
 </head>
+
 <body>
     <div class="form-container">
         <!-- Main Title -->
         <div class="main-title"><b><u>Movie Review</u></b></div>
 
         <!-- Form -->
-        <form method="POST">
+        <form id="movieForm" method="POST">
             {% csrf_token %}
             <label for="actorNameInput">Actor Name:</label>
             <input type="text" id="actorNameInput" name="actorNameInput" placeholder="Enter actor name" />
 
             <label for="genreNameInput">Genre Name:</label>
             <input type="text" id="genreNameInput" name="genreNameInput" placeholder="Enter genre name" />
-            
-            <!-- 🔵 Nouveau bouton ajouté ici -->
-            <button type="test" onclick="submitForm('renderList')">Get List Of Films</button>
 
-            <div class="line-above-film"></div> <!-- Line above the Film Name -->
+            <!-- Bouton pour obtenir la liste des films -->
+            <button type="button" onclick="submitForm('renderList')">Get List Of Films</button>
+
+            <div class="line-above-film"></div> <!-- Ligne de séparation -->
 
             <label for="filmNameInput">Film Name:</label>
             <input type="text" id="filmNameInput" name="filmNameInput" placeholder="Enter film name" />
-            <button type="submit" onclick="submitForm('renderSumm')">Submit</button>
 
+            <!-- Bouton de soumission -->
+            <button type="submit" onclick="submitForm('renderSumm')">Submit</button>
         </form>
 
         <script>
             function submitForm(action) {
                 let form = document.getElementById("movieForm");
                 if (action === "renderList") {
-                    form.action = "{% url 'renderList' %}"; 
-            }else if (action === "renderSumm") {
-            form.action = "{% url 'renderSumm' %}"; 
+                    form.action = "{% url 'renderList' %}";
+                } else if (action === "renderSumm") {
+                    form.action = "{% url 'renderSumm' %}";
+                }
+                form.submit();
             }
-            form.submit();
-        }
         </script>
-
     </div>
 </body>
+
+
 </html>
