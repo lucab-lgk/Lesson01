@@ -1,6 +1,25 @@
 import requests  # type: ignore
 
+def getVotes(x):
 
+    url = f"https://api.themoviedb.org/3/search/movie?query={x}&include_adult=false&language=en-US&page=1"
+
+    headers = {
+    "accept": "application/json",
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjYjRjODI0M2FlZTJmOTBkNGRlOTBlYzFhNWYyMjJiZiIsIm5iZiI6MTcyNzc3NTk5MC40NTEsInN1YiI6IjY2ZmJjNGY2OGFhNzM0YjM3NmE2NmY5ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.BeD2qlKPpNtEW2cVPiYhoDKnxy6fgq13EWAe0sqfM4o"
+    }
+
+    response = requests.get(url, headers=headers)
+    json_data = response.json()
+    if 'results' in json_data and json_data['results']:
+        
+        vote = json_data['results'][0]['vote_average']
+        print(vote)
+        return vote
+        
+    
+    print(json_data)
+    
 def nameChange(x):
     # Si x est None ou vide, ne pas effectuer la requête et retourner une valeur vide.
     if not x:
@@ -27,6 +46,7 @@ def nameChange(x):
 
     # Vérifier si la clé 'results' existe et n'est pas vide
     if 'results' in json_data and json_data['results']:
+        
         overview = json_data['results'][0]['overview']
         print(overview)
         return overview

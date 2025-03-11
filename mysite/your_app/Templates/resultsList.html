@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -117,6 +118,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Header Section -->
     <header>
@@ -134,23 +136,24 @@
             <h2>Random List of Films</h2>
             <ul class="film-list">
                 {% for film in actor_result %}
-                    <li onclick="selectFilm(this, '{{ film }}')">{{ film }}</li>
+                <li onclick="selectFilm(this, '{{ film }}')">{{ film }}</li>
                 {% endfor %}
             </ul>
         </div>
 
         <!-- Right Column -->
         <div class="right-column">
-            
+
             <h2>Selected Movie Details (From List)</h2>
             <div class="summary">
                 <p><strong>Name of Selected Film:</strong> <span id="film-name">Click on a film</span></p>
                 <p><strong>Summary:</strong> <span id="film-summary">Summary will appear here</span></p>
+                <p><strong>Note:</strong> <span id="vote_average">Note will appear here</span></p>
             </div>
 
             <br>
             <a href="{% url 'html' %}" class="back-link">Return to Form</a>
-        </br>
+            </br>
 
         </div>
     </div>
@@ -159,31 +162,45 @@
         function selectFilm(element, filmTitle) {
             // Retirer la sélection des autres films
             document.querySelectorAll('.film-list li').forEach(item => item.classList.remove('selected'));
-    
+
             // Ajouter la classe 'selected' au film cliqué
             element.classList.add('selected');
-    
+
             // Mettre à jour les données affichées
             const filmSel_name = document.getElementById('film-name');
             const summarySel_result = document.getElementById('film-summary');
+            const votes = document.getElementById('vote_average');
             filmSel_name.textContent = filmTitle;
             summarySel_result.textContent = 'Loading summary...';
-    
+
+
+
             // Charger le résumé du film sélectionné
             fetch(`/get_movie_summary/?title=${encodeURIComponent(filmTitle)}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.summary) {
                         summarySel_result.textContent = data.summary;
-                    } else {
+                        votes.textContent = data.vote_average;
+                        
+                    }
+                    else if(data.vote_average){
+                        votes.textContent = data.vote_average;
+                    }
+                    else {
                         summarySel_result.textContent = 'No summary available.';
+                        votes.textContent = 'No notes available';
                     }
                 })
                 .catch(() => {
+                    votes.textContent = 'Error loading Note';
                     summarySel_result.textContent = 'Error loading summary.';
                 });
+
+                
         }
     </script>
 
 </body>
+
 </html>

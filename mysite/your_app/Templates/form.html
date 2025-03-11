@@ -80,6 +80,25 @@
             outline: none;
         }
 
+        /* Style pour le slider */
+        .slider-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .slider-container input {
+            width: 100%;
+        }
+
+        .slider-container span {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+
         /* Buttons */
         .button-container {
             display: flex;
@@ -172,6 +191,14 @@
                 <option value="Western">Western</option>
             </select>
 
+            <label for="voteAverage">Minimum Rating:</label>
+            <div class="slider-container">
+                <input type="range" id="voteAverage" name="vote_average" min="1" max="10" step="0.5" value="5.5" oninput="updateRating(this.value)">
+                <span id="ratingValue">5</span> / 10
+            </div>
+            
+
+
             <!-- Bouton pour obtenir la liste des films -->
             <button type="button" onclick="submitForm('renderList')">Get List Of Films</button>
 
@@ -193,6 +220,9 @@
                     form.action = "{% url 'renderSumm' %}";
                 }
                 form.submit();
+            }
+            function updateRating(value) {
+                document.getElementById("ratingValue").textContent = value;
             }
         </script>
     </div>

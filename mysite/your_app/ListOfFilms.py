@@ -35,24 +35,29 @@ def get_genre_id(genre):
         
 
 
-def get_movies_by_actor(x,genre_name):
+def get_movies_by_actor(x,genre_name,vote_average):
         # Obtenir l'ID de l'acteur
-        
+        print(vote_average)
+        print(vote_average)
+                
         random_page = str(random.randint(1,1))
         print("test")
         print(random_page)
         
         actor_id = get_actor_id(x)
         genre_id = get_genre_id(genre_name)
+        
+        
+        
         # Construire l'URL pour découvrir les films de l'acteur
-        if genre_id is None :
+        if genre_id is None:
             
             
             headers = {
                 "accept": "application/json",
                 "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjYjRjODI0M2FlZTJmOTBkNGRlOTBlYzFhNWYyMjJiZiIsIm5iZiI6MTczMjAwOTQzNC4zNDg3MjcyLCJzdWIiOiI2NmZiYzRmNjhhYTczNGIzNzZhNjZmOWUiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.ALd7Ps3igocwTL5NoHKi5g43HRMjiF52uW1sp9ZrwDE"
             }
-            url = f"https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page={random_page}&sort_by=popularity.desc&with_people={actor_id}"
+            url = f"https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page={random_page}&sort_by=popularity.desc&vote_average.gte={vote_average}with_people={actor_id}"
             response4 = requests.get(url, headers=headers)
             print(response4)
             data2 = response4.json()
@@ -60,14 +65,14 @@ def get_movies_by_actor(x,genre_name):
             randompage = data2.get('total_pages',1)
             print(randompage)
             
-            url = f"https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page={get_random(randompage)}&sort_by=popularity.desc&with_people={actor_id}"
+            url = f"https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page={get_random(randompage)}&sort_by=popularity.desc&vote_average.gte={vote_average}with_people={actor_id}"
             
         elif actor_id is None:
             headers = {
     "accept": "application/json",
     "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjYjRjODI0M2FlZTJmOTBkNGRlOTBlYzFhNWYyMjJiZiIsIm5iZiI6MTczMjAwOTQzNC4zNDg3MjcyLCJzdWIiOiI2NmZiYzRmNjhhYTczNGIzNzZhNjZmOWUiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.ALd7Ps3igocwTL5NoHKi5g43HRMjiF52uW1sp9ZrwDE"
         }
-            url = f"https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page={random_page}&sort_by=popularity.desc&with_genres={genre_id}"
+            url = f"https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page={random_page}&sort_by=popularity.desc&vote_average.gte={vote_average}&with_genres={genre_id}"
             
             response4 = requests.get(url, headers=headers)
             print(response4)
@@ -76,15 +81,39 @@ def get_movies_by_actor(x,genre_name):
             randompage = data2.get('total_pages',1)
             print(randompage)
             
-            url = f"https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page={get_random(randompage)}&sort_by=popularity.desc&with_genres={genre_id}"
+            url = f"https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page={get_random(randompage)}&sort_by=popularity.desc&sort_by=popularity.desc&vote_average.gte={vote_average}&with_genres={genre_id}"
 
+        elif actor_id is None and genre_id is None:
+            headers = {
+    "accept": "application/json",
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjYjRjODI0M2FlZTJmOTBkNGRlOTBlYzFhNWYyMjJiZiIsIm5iZiI6MTczMjAwOTQzNC4zNDg3MjcyLCJzdWIiOiI2NmZiYzRmNjhhYTczNGIzNzZhNjZmOWUiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.ALd7Ps3igocwTL5NoHKi5g43HRMjiF52uW1sp9ZrwDE"
+        }
+            url = f"https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page={random_page}&sort_by=popularity.desc&vote_average.gte={vote_average}"
+            
+            response4 = requests.get(url, headers=headers)
+            print(response4)
+            data2 = response4.json()
+            
+            randompage = data2.get('total_pages',1)
+            print(randompage)
+            
+            url = f"https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page={get_random(randompage)}&sort_by=popularity.desc&vote_average.gte={vote_average}"
+
+        
+            
             
         else:
             headers = {
     "accept": "application/json",
     "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjYjRjODI0M2FlZTJmOTBkNGRlOTBlYzFhNWYyMjJiZiIsIm5iZiI6MTczMjAwOTQzNC4zNDg3MjcyLCJzdWIiOiI2NmZiYzRmNjhhYTczNGIzNzZhNjZmOWUiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.ALd7Ps3igocwTL5NoHKi5g43HRMjiF52uW1sp9ZrwDE"
         }
-            url = f"https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page={random_page}&sort_by=popularity.desc&with_genres={genre_id}&with_people={actor_id}"
+            #url = f"https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page={random_page}&sort_by=popularity.desc&with_genres={genre_id}&with_people={actor_id}"
+            
+            url = f"https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page={random_page}&sort_by=popularity.desc&vote_average.gte={vote_average}&with_genres={genre_id}&with_people={actor_id}"
+
+            #url = f"https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&vote_average.gte=4"
+
+            
             
             response4 = requests.get(url, headers=headers)
             print(response4)
@@ -92,9 +121,10 @@ def get_movies_by_actor(x,genre_name):
             
             randompage = data2.get('total_pages',1)
             print(randompage)
-            
-            url = f"https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page={random_page}&sort_by=popularity.desc&with_genres={genre_id}&with_people={actor_id}"
+            #url = f"https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&vote_average.gte=8&with_genres=12&with_people=31"
 
+            url = f"https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page={get_random(randompage)}&sort_by=popularity.desc&vote_average.gte={vote_average}&with_genres={genre_id}&with_people={actor_id}"
+            print(vote_average)
             
         
         headers = {
